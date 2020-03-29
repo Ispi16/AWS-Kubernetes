@@ -1,0 +1,19 @@
+https://app.vagrantup.com/boxes/search
+# search a box
+
+vagrant box add <box>
+# add a specific box to the system
+
+vagrant init <box>
+# Initialize a vagrant file on the system
+
+vagrant up
+# Start the box in VmWare
+
+vagrant ssh
+# Connect to the vm
+
+vagrant ssh-config
+# Debug ssh for config and use for manual connect
+
+ssh <user>@<hostname> -p <port> -i <private_key>

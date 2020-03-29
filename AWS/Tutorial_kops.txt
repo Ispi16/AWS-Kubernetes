@@ -1,0 +1,39 @@
+#URL
+https://github.com/kubernetes/kops
+
+#Get kops
+curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+
+#Rename it into kops, give executable permissions and move it to /usr/local/bin 
+chmod +x kops
+mv kops /usr/local/bin
+
+#Go to S3 on AWS Platform and create a bucket (region is selected using CloudPing.info and see wich has less ms to reach)
+
+#Go to Route53 on AWS Platform for DNS service and for a free dns we have:
+#•	Sign up at http://freedns.afraid.org/
+#•	Choose for subdomain hosting
+#•	Enter the AWS nameservers given to you in route53 as nameservers for the subdomain
+#•	http://www.dot.tk/ provides a free .tk domain name you can use and you can point it to the amazon AWS nameservers
+#•	Namecheap.com often has promotions for tld’s like .co for just a couple of bucks
+
+#After go to Route53 -> DNS Management -> Create Hosted Zone -> Set up dns and add NS records to your DNS manager
+#install bind9-host and do a hostname -t NS <DNS> to verify
+
+#I used a private hostez zone Route53 with random domain name and associated with my vpc
+
+#Install kubectl, give it permissions and move it to /usr/local/bin
+
+#create new key ssh-keygen -f .ssh/id_rsa , which will went on the instance and we log with the private key
+
+#create the cluster
+kops create cluster --state=<S3_bucket> --node-count=2 --master-size=t2.micro --node-size=t2.micro --zones=<zone> --name=<DNS_name> --dns private --master-count 1
+
+#update the cluster
+kops update cluster --state=<s3_bucket> --name=<DNS_name> --yes
+
+#validate the cluster
+kops validate cluster --state=<s3_bucket> --name=<DNS_name> --yes
+
+#delete the cluster
+kops delete cluster --state=<s3_bucket> --name=<DNS_name> --yes

@@ -1,0 +1,13 @@
+#install python and python-pip
+apt-get install python-pip
+
+#install awscli
+pip install awscli
+
+#On AWS platform go to IAM -> Users -> Create users -> kops and it will generate a access key for it
+aws configure # create aws access
+#On AWS platform go to IAM -> Users -> kops -> Permissions -> attach existing policies -> AdministratorAccess
+
+
+#create ec2
+aws ec2 create-volume --size 10 --region us-east-1 --availability-zone us-east-1a --volume-type gp2
