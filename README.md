@@ -1,2 +1,4 @@
 # AWS-Kubernetes
-# Test 2 key working
+
+
+Tutorial for what i used to test Kubernetes on AWS for production ready clusters
