@@ -17,3 +17,9 @@ vagrant ssh-config
 # Debug ssh for config and use for manual connect
 
 ssh <user>@<hostname> -p <port> -i <private_key>
+
+vagrant halt
+#stop the vm
+
+vagrant destroy
+#destory the vm
